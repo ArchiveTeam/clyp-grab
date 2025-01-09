@@ -77,7 +77,7 @@ if not WGET_AT:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = '20250110.01'
+VERSION = '20250110.02'
 USER_AGENT = 'Mozilla/5.0 (X11; Linux i686; rv:124.0) Gecko/20100101 Firefox/124.0'
 TRACKER_ID = 'clyp'
 TRACKER_HOST = 'legacy-api.arpa.li'
@@ -314,6 +314,10 @@ class WgetArgs(object):
             elif item_type == 'user':
                 wget_args.extend(['--warc-header', 'clyp-user: '+item_value])
                 wget_args.append('https://clyp.it/user/'+item_value)
+            elif item_type == 'asset':
+                url = 'https://' + item_value
+                wget_args.extend(['--warc-header', 'clyp-user: '+url])
+                wget_args.append(url)
             else:
                 raise Exception('Unknown item')
 
