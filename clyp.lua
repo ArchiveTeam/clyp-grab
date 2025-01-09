@@ -390,6 +390,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     and status_code < 300
     and item_type ~= "asset"
     and not string.match(url, "^https?://audio%.clyp%.it/")
+    and not string.match(url, "^https?://a%.clyp%.it/")
     and not string.match(url, "^https?://soundwave%.clyp%.it/") then
     html = read_file(file)
     if string.match(html, "^%s*{") then
