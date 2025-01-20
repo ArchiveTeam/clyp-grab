@@ -399,13 +399,15 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     if string.match(url, "^https?://clyp%.it/[a-z0-9]+$") then
       check("https://clyp.it/" .. item_value .. "/widget")
       check("https://api.clyp.it/" .. item_value)
-      check("https://api.clyp.it/" .. item_value .. "/comments")
       check("https://soundwave.clyp.it/" .. item_value)
       check("https://api.clyp.it/" .. item_value .. "/playlist")
     end
     if string.match(url, "^https?://api%.clyp%.it/[a-z0-9]+$") then
       if json["Status"] ~= "DownloadDisabled" then
         check("https://api.clyp.it/" .. item_value .. "/downloadurl?fileType=mp3")
+      end
+      if json["CommentsEnabled"] then
+        check("https://api.clyp.it/" .. item_value .. "/comments")
       end
     end
     if string.match(url, "^https?://clyp%.it/user/[a-z0-9]+$") then
